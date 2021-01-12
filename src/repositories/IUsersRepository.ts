@@ -1,4 +1,4 @@
-import { User } from "../modules/User";
+import { User } from '../models/User'
 
 export interface IUsersRepository{
     findByEmail(email: string): Promise<User>;
