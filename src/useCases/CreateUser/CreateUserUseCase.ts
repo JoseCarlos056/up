@@ -17,7 +17,6 @@ export class CreateUserUseCase {
       throw new Error('User already exists.')
     }
     const user = new User(data)
-    console.log(user, 'xx')
     await this.usersRepository.save(user)
     this.mailProvider.sendMail({
       to: {

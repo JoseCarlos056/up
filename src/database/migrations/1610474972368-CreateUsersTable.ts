@@ -25,7 +25,7 @@ export class CreateUsersTable1610474972368 implements MigrationInterface {
           length: '255'
         },
         {
-          name: 'emergency_password',
+          name: 'emergencyPassword',
           type: 'varchar'
         }
       ]

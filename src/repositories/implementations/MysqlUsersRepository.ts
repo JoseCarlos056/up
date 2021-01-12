@@ -9,13 +9,13 @@ export class MysqlUsersRepository implements IUsersRepository {
   }
 
   async save (user: User): Promise<void> {
+    console.log(user)
     const userRepo = getRepository(User)
-    const userExists = userRepo.findOne({ where: { email: user.email } })
-    console.log(userRepo, 'aa')
     const newUser = userRepo.create(user)
     console.log(newUser)
     await userRepo.save(newUser).catch((err) => {
       console.log('Error: ', err)
+      throw new Error('Failure to create User. Erro: ' + err)
     })
     console.log('New User Saved', newUser)
   };
