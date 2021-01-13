@@ -17,7 +17,7 @@ class User {
     @Column()
     public emergencyPassword: string
 
-    public emergency: boolean
+    public emergency?: boolean
 
     @BeforeInsert()
     @BeforeUpdate()

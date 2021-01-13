@@ -9,23 +9,23 @@ export class AuthenticateUserUseCase {
   ) {}
 
   async execute (data: IAuthenticateUserRequestDTO) {
-    const userExists = await this.usersRepository.findByEmail(data.email)
-    if (!userExists) {
+    const user = await this.usersRepository.findByEmail(data.email)
+    if (!user) {
       throw new Error('User not exists.')
     }
-    const isValidPassword = await bcrypt.compare(data.password, userExists.password)
+    const isValidPassword = await bcrypt.compare(data.password, user.password)
     if (!isValidPassword) {
-      const isValidEmergencyPassword = await bcrypt.compare(data.password, userExists.emergencyPassword)
+      const isValidEmergencyPassword = await bcrypt.compare(data.password, user.emergencyPassword)
       if (!isValidEmergencyPassword) {
         throw new Error('Invalide Password.')
       }
-      userExists.emergency = true
+      user.emergency = true
     }
-    delete userExists.password
-    delete userExists.emergencyPassword
-    const token = jwt.sign({ id: userExists.id }, 'secret', { expiresIn: '1d' })
+    delete user.password
+    delete user.emergencyPassword
+    const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '1d' })
     return {
-      userExists,
+      user,
       token
     }
   }
