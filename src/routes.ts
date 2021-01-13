@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { authenticateUserController } from './useCases/AuthenticateUser'
 import { createUserController } from './useCases/CreateUser'
-
+// import authMiddleware from './middlewares/authMiddleware'
 const router = Router()
 router.post('/users', (request, response) => {
   return createUserController.handle(request, response)
