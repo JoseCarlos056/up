@@ -27,6 +27,7 @@
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.9",
     "@types/jsonwebtoken": "^8.5.0",
+    "@types/multer": "^1.4.5",
     "@types/mysql": "^2.15.17",
     "@types/nodemailer": "^6.4.0",
     "@types/validator": "^13.1.3",
