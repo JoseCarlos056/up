@@ -13,21 +13,18 @@ router.post('/auth', (request, response) => {
   return authenticateUserController.handle(request, response)
 })
 router.post('/file', authMiddleware, multerMiddleware.single('file'), (request, response) => {
-  // console.log(request.file)
-  const encrypt = (buffer) => {
-    // Create an initialization vector
-    const iv = crypto.randomBytes(16)
-    // Create a new cipher using the algorithm, key, and iv
-    const cipher = crypto.createCipheriv('aes-256-ctr', '12345678998745632147145874512547', iv)
-    // Create the new (encrypted) buffer
-    const result = Buffer.concat([iv, cipher.update(buffer), cipher.final()])
-    return result
-  }
-  const bff = encrypt(request.file.buffer)
-
-  fs.writeFile('image.txt', bff, () => {
-
+  console.log(request.file)
+  const cipher = crypto.createCipher('aes-256-cbc', 'teste122')
+  const fileName = request.file.destination + '\\' + request.file.filename
+  const input = fs.createReadStream(fileName)
+  const output = fs.createWriteStream(fileName + '.enc')
+  input.pipe(cipher).pipe(output)
+  output.on('finish', function () {
+    fs.unlink(fileName, (err) => {
+      if (err) throw err
+      console.log('Encrypted  file written to disk!')
+    })
   })
-  return response.send(bff.toString('base64'))
+  return response.send(true)
 })
 export { router }
