@@ -2,8 +2,6 @@ import { Router } from 'express'
 import multerMiddleware from './middlewares/multerMiddleware'
 import { authenticateUserController } from './useCases/AuthenticateUser'
 import { createUserController } from './useCases/CreateUser'
-import crypto from 'crypto'
-import fs from 'fs'
 import authMiddleware from './middlewares/authMiddleware'
 import { uploadFileController } from './useCases/UploadFile'
 const router = Router()

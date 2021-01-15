@@ -14,12 +14,11 @@ class UploadFileUseCase {
   }
 
   async execute (data: IUploadFileDTO) {
-    const key = crypto.createHash('aes-256-cbc').update(data.file.filename + data.userId).digest('hex')
-    const iv = crypto.createHash('aes-256-cbc').update(data.file.filename).digest('hex')
-    const cipher = crypto.createCipheriv('aes-256-cbc', key, iv)
+    const key = crypto.createHash('sha256').update(data.userId + data.file.filename).digest('hex').substr(0, 32)
+    const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(key), Buffer.from(data.file.filename.split('-').shift(), 'hex'))
     const fileName = data.file.destination + '\\' + data.file.filename
     const input = fs.createReadStream(fileName)
-    const output = fs.createWriteStream(fileName + '.enc')
+    const output = fs.createWriteStream(`${fileName}.enc`)
     input.pipe(cipher).pipe(output)
     output.on('finish', function () {
       fs.unlink(fileName, (err) => {
@@ -27,8 +26,8 @@ class UploadFileUseCase {
       })
     })
     const user = new User({ id: data.userId })
-    const file = new File({ directory: fileName + '.enc', name: data.file.originalname, userId: user })
-    this.filesRepository.save(file)
+    const file = new File({ directory: fileName + '.enc', name: data.file.originalname, user: user })
+    await this.filesRepository.save(file)
   }
 }
 

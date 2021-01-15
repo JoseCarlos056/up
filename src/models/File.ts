@@ -12,7 +12,7 @@ class File {
     public directory?: string
 
     @ManyToOne(() => User, user => user.id)
-    userId?: User;
+    user?: User;
 
     constructor (props: File) {
       Object.assign(this, props)
