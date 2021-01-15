@@ -10,7 +10,7 @@ class UploadFileController {
   }
 
   async handle (request: Request, response: Response):Promise<Response> {
-    const { file, userId } = request.body
+    const { file, userId } = request
     try {
       await this.uploadFileUseCase.execute({ userId, file })
       return response.status(201).send()

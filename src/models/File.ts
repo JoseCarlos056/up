@@ -6,14 +6,16 @@ class File {
     public readonly id?: string
 
     @Column()
-    public name: string
+    public name?: string
 
     @Column()
-    public directory: string
+    public directory?: string
 
     @ManyToOne(() => User, user => user.id)
-    userId: User;
+    userId?: User;
 
-  // eslint-disable-next-line no-useless-constructor
+    constructor (props: File) {
+      Object.assign(this, props)
+    }
 }
 export { File }

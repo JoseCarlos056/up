@@ -3,19 +3,19 @@ import bcrypt from 'bcryptjs'
 @Entity('users')
 class User {
     @PrimaryGeneratedColumn('uuid')
-    public readonly id: string
+    public readonly id?: string
 
     @Column()
-    public name: string
+    public name?: string
 
     @Column()
-    public email: string
+    public email?: string
 
     @Column()
-    public password: string
+    public password?: string
 
     @Column()
-    public emergencyPassword: string
+    public emergencyPassword?: string
 
     public emergency?: boolean
 
@@ -27,7 +27,7 @@ class User {
     }
 
     // eslint-disable-next-line no-useless-constructor
-    constructor (props: Omit<User, 'id'>, id?:string) {
+    constructor (props: User) {
       Object.assign(this, props)
     }
 }

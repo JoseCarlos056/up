@@ -1,3 +1,5 @@
+import { File } from '../models/File'
+
 export interface IFilesRepository{
-    save(): Promise<void>
+    save(file:File): Promise<void>
 }
