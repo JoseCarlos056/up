@@ -5,13 +5,13 @@ import { createUserController } from './useCases/CreateUser'
 import authMiddleware from './middlewares/authMiddleware'
 import { uploadFileController } from './useCases/UploadFile'
 const router = Router()
-router.post('/users', (request, response) => {
-  return createUserController.handle(request, response)
+router.post('/users', async (request, response) => {
+  return await createUserController.handle(request, response)
 })
-router.post('/auth', (request, response) => {
-  return authenticateUserController.handle(request, response)
+router.post('/auth', async (request, response) => {
+  return await authenticateUserController.handle(request, response)
 })
-router.post('/file', authMiddleware, multerMiddleware.single('file'), (request, response) => {
-  return uploadFileController.handle(request, response)
+router.post('/file', authMiddleware, multerMiddleware.single('file'), async (request, response) => {
+  return await uploadFileController.handle(request, response)
 })
 export { router }
