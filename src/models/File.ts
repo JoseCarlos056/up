@@ -6,10 +6,13 @@ class File {
     public readonly id?: string
 
     @Column()
-    public name?: string
+    public fileName?: string
 
     @Column()
-    public directory?: string
+    public originalName?: string
+
+    @Column()
+    public url?: string
 
     @ManyToOne(() => User, user => user.id)
     user?: User;

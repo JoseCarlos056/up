@@ -12,11 +12,15 @@ export class CreateFilesTable1610562050352 implements MigrationInterface {
           generationStrategy: 'uuid'
         },
         {
-          name: 'name',
+          name: 'fileName',
           type: 'varchar'
         },
         {
-          name: 'directory',
+          name: 'originalName',
+          type: 'varchar'
+        },
+        {
+          name: 'url',
           type: 'varchar'
         }, {
           name: 'userId',

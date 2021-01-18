@@ -4,7 +4,7 @@ import crypto from 'crypto'
 import fs from 'fs'
 import { File } from '../../models/File'
 import { User } from '../../models/User'
-
+import 'dotenv'
 class UploadFileUseCase {
   // eslint-disable-next-line no-useless-constructor
   constructor (
@@ -26,7 +26,7 @@ class UploadFileUseCase {
       })
     })
     const user = new User({ id: data.userId })
-    const file = new File({ directory: fileName + '.enc', name: data.file.originalname, user: user })
+    const file = new File({ url: process.env.URL_SERVER + data.file.filename + '.enc', originalName: data.file.originalname, fileName: data.file.filename, user: user })
     await this.filesRepository.save(file)
   }
 }
