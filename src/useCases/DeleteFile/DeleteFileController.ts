@@ -1,19 +1,19 @@
 import { Request, Response } from 'express'
-import { GetFileUseCase } from './GetFileUseCase'
+import { DeleteFileUseCase } from './DeleteFileUseCase'
 
-class GetFileController {
+class DeleteFileController {
   // eslint-disable-next-line no-useless-constructor
   constructor (
-        private getFileUseCase: GetFileUseCase
+        private deleteFileUseCase: DeleteFileUseCase
   ) {
 
   }
 
   async handle (request: Request, response: Response):Promise<Response> {
-    const { userId } = request
+    const { file } = request.body
     try {
-      const files = await this.getFileUseCase.execute({ userId })
-      return response.status(200).send({ data: files })
+      await this.deleteFileUseCase.execute({ file })
+      return response.status(200).send()
     } catch (error) {
       return response.status(400).json({
         message: error.message || 'Unexpected error'
@@ -21,4 +21,4 @@ class GetFileController {
     }
   }
 }
-export { GetFileController }
+export { DeleteFileController }

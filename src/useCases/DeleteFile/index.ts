@@ -1,8 +1,8 @@
 import { MysqlFilesRepository } from '../../repositories/implementations/MysqlFilesRepository'
-import { GetFileController } from './GetFileController'
-import { GetFileUseCase } from './GetFileUseCase'
+import { DeleteFileController } from './DeleteFileController'
+import { DeleteFileUseCase } from './DeleteFileUseCase'
 const mysqlFilesRepository = new MysqlFilesRepository()
-const getFileUseCase = new GetFileUseCase(mysqlFilesRepository)
-const getFileController = new GetFileController(getFileUseCase)
+const deleteFileUseCase = new DeleteFileUseCase(mysqlFilesRepository)
+const deleteFileController = new DeleteFileController(deleteFileUseCase)
 
-export { getFileController, getFileUseCase }
+export { deleteFileController, deleteFileUseCase }

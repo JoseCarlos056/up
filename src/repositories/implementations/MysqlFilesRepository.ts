@@ -21,6 +21,7 @@ export class MysqlFilesRepository implements IFilesRepository {
   }
 
   async delete (file: File): Promise<void> {
-
+    const fileRepo = getRepository(File)
+    await fileRepo.delete(file.id)
   }
 }
