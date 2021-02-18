@@ -27,7 +27,8 @@ class UploadFileUseCase {
     })
     const user = new User({ id: data.userId })
     const file = new File({ url: process.env.URL_SERVER + data.file.filename + '.enc', originalName: data.file.originalname, fileName: data.file.filename, user: user })
-    await this.filesRepository.save(file)
+    const filesaved = await this.filesRepository.save(file)
+    return filesaved
   }
 }
 

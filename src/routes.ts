@@ -19,7 +19,7 @@ router.post('/file', authMiddleware, multerMiddleware.single('file'), async (req
 router.get('/file', authMiddleware, async (request, response) => {
   return await getFileController.handle(request, response)
 })
-router.delete('/file', authMiddleware, async (request, response) => {
+router.delete('/file/:id', authMiddleware, async (request, response) => {
   return await deleteFileController.handle(request, response)
 })
 export { router }

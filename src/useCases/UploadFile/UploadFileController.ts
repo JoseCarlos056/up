@@ -12,8 +12,8 @@ class UploadFileController {
   async handle (request: Request, response: Response):Promise<Response> {
     const { file, userId } = request
     try {
-      await this.uploadFileUseCase.execute({ userId, file })
-      return response.status(201).send()
+      const filesaved = await this.uploadFileUseCase.execute({ userId, file })
+      return response.status(201).send(filesaved)
     } catch (error) {
       return response.status(400).json({
         message: error.message || 'Unexpected error'
