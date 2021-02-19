@@ -13,7 +13,7 @@ class DeleteFileUseCase {
   async execute (data: IDeleteFileDTO) {
     const file = await this.filesRepository.findById(data.id)
     await this.filesRepository.delete(data.id)
-    fs.unlinkSync(path.resolve(__dirname, '..', '..', '..', 'uploads') + file.fileName)
+    fs.unlinkSync(path.resolve(__dirname, '..', '..', '..', 'uploads') + '\\' + file.fileName + '.enc')
   }
 }
 
